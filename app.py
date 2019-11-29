@@ -1,17 +1,11 @@
 from flask import Flask, render_template
 from flask import redirect, url_for
-from flask_jsglue import JSGlue
 import requests
 
-# jsglue = JSGlue()
-
 app = Flask(__name__)
-# jsglue.init_app(app)
 
 @app.route('/')
 def basic():
-    # return redirect(url_for('sort', attribute="country", reverse=True))
-
     response = requests.get(url='https://web-project-59451.firebaseio.com/suicide-statistics.json')
     # response.json() is a list
     return render_template("display.html", data=response.json())
@@ -28,9 +22,6 @@ def filterOnNum(attribute: str, start: str, end: str):
 
 @app.route('/filterOnCountry/<country>')
 def filterOnCountry(country: str):
-# @app.route('/')
-# def test():
-#     country = "and"
     print("2333")
     print(country)
     print(type(country))
@@ -50,10 +41,6 @@ def filterOnCountry(country: str):
 
 @app.route('/sort/<attribute>/<reverse>')
 def sort(attribute: str, reverse: str):
-# @app.route('/')
-# def sort():
-#     attribute = "country"
-#     reverse = True
     data = requests.get(url='https://web-project-59451.firebaseio.com/suicide-statistics.json').json()
 
     # data is a list of dict
